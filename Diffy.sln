@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diffy.NETCore", "Diffy.NETCore\Diffy.NETCore.csproj", "{8669918E-EC0A-4BB1-8450-44B6C885C8E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diffy.NET", "Diffy.NET\Diffy.NET.csproj", "{9FE5ACFE-A077-4695-9169-38C9F713C937}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8669918E-EC0A-4BB1-8450-44B6C885C8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8669918E-EC0A-4BB1-8450-44B6C885C8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8669918E-EC0A-4BB1-8450-44B6C885C8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8669918E-EC0A-4BB1-8450-44B6C885C8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE5ACFE-A077-4695-9169-38C9F713C937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE5ACFE-A077-4695-9169-38C9F713C937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE5ACFE-A077-4695-9169-38C9F713C937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE5ACFE-A077-4695-9169-38C9F713C937}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
