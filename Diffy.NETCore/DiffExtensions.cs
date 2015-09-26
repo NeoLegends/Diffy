@@ -14,6 +14,9 @@ namespace Diffy
         /// <summary>
         /// Computes the diff between two sequences.
         /// </summary>
+        /// <remarks>
+        /// Since computing the diff requires an <see cref="IList{T}"/>, this method executes the <see cref="IEnumerable{T}"/>.
+        /// </remarks>
         /// <typeparam name="T">The <see cref="Type"/> of element.</typeparam>
         /// <param name="source">The source sequence.</param>
         /// <param name="destination">The sequence, <paramref name="source"/> shall be transformed into.</param>
@@ -26,6 +29,9 @@ namespace Diffy
         /// <summary>
         /// Computes the diff between two sequences.
         /// </summary>
+        /// <remarks>
+        /// Since computing the diff requires an <see cref="IList{T}"/>, this method executes the <see cref="IEnumerable{T}"/>.
+        /// </remarks>
         /// <typeparam name="T">The <see cref="Type"/> of element.</typeparam>
         /// <param name="source">The source sequence.</param>
         /// <param name="destination">The sequence, <paramref name="source"/> shall be transformed into.</param>
@@ -42,6 +48,9 @@ namespace Diffy
         /// <summary>
         /// Computes the diff between two sequences.
         /// </summary>
+        /// <remarks>
+        /// Since computing the diff requires an <see cref="IList{T}"/>, this method executes the <see cref="IEnumerable{T}"/>.
+        /// </remarks>
         /// <typeparam name="T">The <see cref="Type"/> of element.</typeparam>
         /// <typeparam name="TComparand">The <see cref="Type"/> of element to be compared.</typeparam>
         /// <param name="source">The source sequence.</param>
@@ -57,6 +66,9 @@ namespace Diffy
         /// <summary>
         /// Computes the diff between two sequences.
         /// </summary>
+        /// <remarks>
+        /// Since computing the diff requires an <see cref="IList{T}"/>, this method executes the <see cref="IEnumerable{T}"/>.
+        /// </remarks>
         /// <typeparam name="T">The <see cref="Type"/> of element.</typeparam>
         /// <typeparam name="TComparand">The <see cref="Type"/> of element to be compared.</typeparam>
         /// <param name="source">The source sequence.</param>
@@ -82,7 +94,7 @@ namespace Diffy
         /// <returns>The diff data.</returns>
         public static IEnumerable<DiffSection> Diff<T>(this IList<T> source, IList<T> destination)
         {
-            return Diff(source, destination, EqualityComparer<T>.Default);
+            return Diffy.Diff.Compute(source, destination);
         }
 
         /// <summary>
@@ -95,10 +107,7 @@ namespace Diffy
         /// <returns>The diff data.</returns>
         public static IEnumerable<DiffSection> Diff<T>(this IList<T> source, IList<T> destination, IEqualityComparer<T> comparer)
         {
-            Requires.NotNull(source, nameof(source));
-            Requires.NotNull(destination, nameof(destination));
-
-            return Diffy.Diff.Compute(source, 0, source.Count, destination, 0, destination.Count, comparer);
+            return Diffy.Diff.Compute(source, destination, comparer);
         }
 
         /// <summary>
@@ -135,11 +144,7 @@ namespace Diffy
 
             List<TComparand> newSource = source.Select(selector).ToList();
             List<TComparand> newDestination = destination.Select(selector).ToList();
-            return Diffy.Diff.Compute(
-                newSource, 0, newSource.Count,
-                newDestination, 0, newDestination.Count,
-                comparer
-            );
+            return Diffy.Diff.Compute(newSource, newDestination, comparer);
         }
 
         /// <summary>
@@ -212,7 +217,7 @@ namespace Diffy
             int destIndex = 0;
             int sourceIndex = 0;
             foreach (DiffSection section in diff) {
-                // Try to use the *Range-methods. This saves us from firing loads of events.
+                // Try to use the *Range-methods to reduce events on GUI thread
                 switch (section.Type) {
                     case DiffSectionType.Copy:
                         destIndex += section.Length;

@@ -36,6 +36,42 @@ namespace Diffy
         /// </remarks>
         /// <typeparam name="T">The type of element inside the lists.</typeparam>
         /// <param name="firstCollection">The source collection.</param>
+        /// <param name="secondCollection">The destination collection.</param>
+        /// <returns>The diff data.</returns>
+        public static IEnumerable<DiffSection> Compute<T>(IList<T> firstCollection, IList<T> secondCollection)
+        {
+            return Compute(firstCollection, secondCollection, EqualityComparer<T>.Default);
+        }
+
+        /// <summary>
+        /// Computes the difference between two lists.
+        /// </summary>
+        /// <remarks>
+        /// The diff data will be computed lazily via yield. You need to enumerate the enumerable
+        /// to do the whole processing.
+        /// </remarks>
+        /// <typeparam name="T">The type of element inside the lists.</typeparam>
+        /// <param name="firstCollection">The source collection.</param>
+        /// <param name="secondCollection">The destination collection.</param>
+        /// <param name="comparer">The <see cref="IEqualityComparer{T}"/> used to test for equality.</param>
+        /// <returns>The diff data.</returns>
+        public static IEnumerable<DiffSection> Compute<T>(IList<T> firstCollection, IList<T> secondCollection, IEqualityComparer<T> comparer)
+        {
+            Requires.NotNull(firstCollection, nameof(firstCollection));
+            Requires.NotNull(secondCollection, nameof(secondCollection));
+
+            return Compute(firstCollection, 0, firstCollection.Count, secondCollection, 0, secondCollection.Count, comparer);
+        }
+
+        /// <summary>
+        /// Computes the difference between two lists.
+        /// </summary>
+        /// <remarks>
+        /// The diff data will be computed lazily via yield. You need to enumerate the enumerable
+        /// to do the whole processing.
+        /// </remarks>
+        /// <typeparam name="T">The type of element inside the lists.</typeparam>
+        /// <param name="firstCollection">The source collection.</param>
         /// <param name="firstStart">The starting index inside the first collection.</param>
         /// <param name="firstEnd">The ending index inside the first collection.</param>
         /// <param name="secondCollection">The destination collection.</param>
@@ -116,6 +152,13 @@ namespace Diffy
             IList<T> secondCollection, int secondStart, int secondEnd,
             IEqualityComparer<T> equalityComparer)
         {
+            Requires.NotNull(firstCollection, nameof(firstCollection));
+            Requires.NotNull(secondCollection, nameof(secondCollection));
+            Requires.NotNull(equalityComparer, nameof(equalityComparer));
+            Requires.Condition(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
+            Requires.Condition(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
+            Requires.NotNull(equalityComparer, nameof(equalityComparer));
+
             // default result, if we can't find anything
             LongestCommonSubsequenceResult result = new LongestCommonSubsequenceResult();
 
@@ -160,6 +203,13 @@ namespace Diffy
             IList<T> secondCollection, int secondPosition, int secondEnd,
             IEqualityComparer<T> equalityComparer)
         {
+            Requires.NotNull(firstCollection, nameof(firstCollection));
+            Requires.NotNull(secondCollection, nameof(secondCollection));
+            Requires.NotNull(equalityComparer, nameof(equalityComparer));
+            Requires.Condition(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
+            Requires.Condition(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
+            Requires.NotNull(equalityComparer, nameof(equalityComparer));
+
             int length = 0;
             while (firstPosition < firstEnd && secondPosition < secondEnd) {
                 if (!equalityComparer.Equals(firstCollection[firstPosition], secondCollection[secondPosition])) {

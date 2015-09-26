@@ -47,8 +47,8 @@
     <Compile Include="..\Diffy.NETCore\DiffSection.cs">
       <Link>DiffSection.cs</Link>
     </Compile>
-    <Compile Include="..\Diffy.NETCore\LongestCommonSubstringResult.cs">
-      <Link>LongestCommonSubstringResult.cs</Link>
+    <Compile Include="..\Diffy.NETCore\LongestCommonSubsequenceResult.cs">
+      <Link>LongestCommonSubsequenceResult.cs</Link>
     </Compile>
     <Compile Include="..\Diffy.NETCore\Requires.cs">
       <Link>Requires.cs</Link>

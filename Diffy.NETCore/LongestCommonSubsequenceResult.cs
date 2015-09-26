@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Diffy
 {
     /// <summary>
-    /// Represents a longest common substring.
+    /// Represents a longest common subsequence.
     /// </summary>
     public struct LongestCommonSubsequenceResult : IEquatable<LongestCommonSubsequenceResult>
     {
