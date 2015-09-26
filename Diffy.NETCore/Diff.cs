@@ -8,21 +8,6 @@ using System.Threading.Tasks;
 namespace Diffy
 {
     /// <summary>
-    /// A delegate used to represent a method inserting a group of items into a collection.
-    /// </summary>
-    /// <typeparam name="T">The type of item inside the collection.</typeparam>
-    /// <param name="index">The index to insert at.</param>
-    /// <param name="items">The items to insert.</param>
-    public delegate void InsertRangeDelegate<T>(int index, IEnumerable<T> items);
-
-    /// <summary>
-    /// A delegate used to represent a method removing ranges from a collection.
-    /// </summary>
-    /// <param name="index">The index to start removing at.</param>
-    /// <param name="count">The amount of elements to remove.</param>
-    public delegate void RemoveRangeDelegate(int index, int count);
-
-    /// <summary>
     /// Contains methods to compute the difference between two lists.
     /// </summary>
     public static class Diff
