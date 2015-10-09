@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Diffy
 {
+    // We use a custom requires class instead of Code Contracts to avoid
+    // the build speed penalty and verbosity.
+
     internal static class Requires
     {
         [Conditional("REQUIRES_FULL")]

@@ -227,8 +227,45 @@ namespace Diffy
             Requires.NotNull(destination, nameof(destination));
             Requires.NotNull(comparer, nameof(comparer));
 
-            IEnumerable<DiffSection> diff = source.Diff(destination, comparer);
+            TransformTo(
+                source, 
+                destination, 
+                Diffy.Diff.Compute(source, destination, comparer), 
+                comparer, 
+                sourceInsertRangeDelegate, 
+                sourceRemoveRangeDelegate
+            );
+        }
 
+        /// <summary>
+        /// Applies the given <paramref name="diff"/> and transforms the <paramref name="source"/> into the <paramref name="destination"/>.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Since lots of calls to .Insert / .Remove may generate lots of events on the UI thread, 
+        /// this method allows you to specify the methods for .InsertRange and .RemoveRange. Those methods
+        /// will be used instead of the ones for single elements.
+        /// </para>
+        /// <para>
+        /// Use this overload, if your actual list type is not <see cref="List{T}"/>.
+        /// </para>
+        /// </remarks>
+        /// <typeparam name="T">The <see cref="Type"/> of element.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="destination">The sequence, <paramref name="source"/> shall be transformed into.</param>
+        /// <param name="diff">The diff to apply.</param>
+        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to test for equality.</param>
+        /// <param name="sourceInsertRangeDelegate">The InsertRange-method of the source element. May be null.</param>
+        /// <param name="sourceRemoveRangeDelegate">The RemoveRange-method of the source element. May be null.</param>
+        public static void TransformTo<T>(
+            this IList<T> source, IList<T> destination, IEnumerable<DiffSection> diff, IEqualityComparer<T> comparer,
+            InsertRangeDelegate<T> sourceInsertRangeDelegate, RemoveRangeDelegate sourceRemoveRangeDelegate)
+        {
+            Requires.NotNull(source, nameof(source));
+            Requires.NotNull(destination, nameof(destination));
+            Requires.NotNull(diff, nameof(diff));
+            Requires.NotNull(comparer, nameof(comparer));
+            
             int destIndex = 0;
             int sourceIndex = 0;
             foreach (DiffSection section in diff) {
