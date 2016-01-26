@@ -231,7 +231,6 @@ namespace Diffy
                 source, 
                 destination, 
                 Diffy.Diff.Compute(source, destination, comparer), 
-                comparer, 
                 sourceInsertRangeDelegate, 
                 sourceRemoveRangeDelegate
             );
@@ -254,17 +253,15 @@ namespace Diffy
         /// <param name="source">The source sequence.</param>
         /// <param name="destination">The sequence, <paramref name="source"/> shall be transformed into.</param>
         /// <param name="diff">The diff to apply.</param>
-        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to test for equality.</param>
         /// <param name="sourceInsertRangeDelegate">The InsertRange-method of the source element. May be null.</param>
         /// <param name="sourceRemoveRangeDelegate">The RemoveRange-method of the source element. May be null.</param>
         public static void TransformTo<T>(
-            this IList<T> source, IList<T> destination, IEnumerable<DiffSection> diff, IEqualityComparer<T> comparer,
+            this IList<T> source, IList<T> destination, IEnumerable<DiffSection> diff,
             InsertRangeDelegate<T> sourceInsertRangeDelegate, RemoveRangeDelegate sourceRemoveRangeDelegate)
         {
             Requires.NotNull(source, nameof(source));
             Requires.NotNull(destination, nameof(destination));
             Requires.NotNull(diff, nameof(diff));
-            Requires.NotNull(comparer, nameof(comparer));
             
             int destIndex = 0;
             int sourceIndex = 0;

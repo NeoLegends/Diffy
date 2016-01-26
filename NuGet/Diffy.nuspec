@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>Diffy</id>
-    <version>0.9.3-pre</version>
+    <version>0.9.4-pre</version>
     <authors>Moritz Gunz</authors>
     <owners>Moritz Gunz</owners>
     <licenseUrl>https://github.com/NeoLegends/Diffy/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/NeoLegends/Diffy</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A library for generating and applying generic list diffs.</description>
-    <releaseNotes>Added overload to inject pre-computed diff into TransformTo.</releaseNotes>
-    <copyright>Copyright 2015 Moritz Gunz</copyright>
+    <releaseNotes>Removed unused IEqualityComparer parameter.</releaseNotes>
+    <copyright>Copyright 2016 Moritz Gunz</copyright>
     <tags>generic list diff difference</tags>
   </metadata>
 </package>
