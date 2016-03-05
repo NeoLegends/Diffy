@@ -12,7 +12,7 @@ namespace Diffy
     public enum DiffSectionType
     {
         /// <summary>
-        /// The elements must be copied.
+        /// The elements must be kept / copied.
         /// </summary>
         Copy,
 

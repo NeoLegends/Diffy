@@ -70,11 +70,11 @@ namespace Diffy
             IEqualityComparer<T> equalityComparer)
         {
             Requires.NotNull(firstCollection, nameof(firstCollection));
-            Requires.Condition(firstStart >= 0, nameof(firstStart), nameof(firstStart) + " must be greater than zero!");
-            Requires.Condition(firstEnd >= 0, nameof(firstEnd), nameof(firstStart) + " must be greater than zero!");
+            Requires.Range(firstStart >= 0, nameof(firstStart), nameof(firstStart) + " must be greater than zero!");
+            Requires.Range(firstEnd >= 0, nameof(firstEnd), nameof(firstStart) + " must be greater than zero!");
             Requires.NotNull(secondCollection, nameof(secondCollection));
-            Requires.Condition(secondStart >= 0, nameof(secondStart), nameof(secondStart) + " must be greater than zero!");
-            Requires.Condition(secondEnd >= 0, nameof(secondEnd), nameof(secondEnd) + " must be greater than zero!");
+            Requires.Range(secondStart >= 0, nameof(secondStart), nameof(secondStart) + " must be greater than zero!");
+            Requires.Range(secondEnd >= 0, nameof(secondEnd), nameof(secondEnd) + " must be greater than zero!");
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
 
             LongestCommonSubsequenceResult lcs = FindLongestCommonSubsequence(
@@ -140,8 +140,8 @@ namespace Diffy
             Requires.NotNull(firstCollection, nameof(firstCollection));
             Requires.NotNull(secondCollection, nameof(secondCollection));
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
-            Requires.Condition(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
-            Requires.Condition(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
+            Requires.Range(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
+            Requires.Range(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
 
             // default result, if we can't find anything
@@ -191,8 +191,8 @@ namespace Diffy
             Requires.NotNull(firstCollection, nameof(firstCollection));
             Requires.NotNull(secondCollection, nameof(secondCollection));
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
-            Requires.Condition(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
-            Requires.Condition(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
+            Requires.Range(firstEnd <= firstCollection.Count, nameof(firstEnd), "Range end must be inside of the first collection.");
+            Requires.Range(secondEnd <= secondCollection.Count, nameof(secondEnd), "Range end must be inside of the second collection.");
             Requires.NotNull(equalityComparer, nameof(equalityComparer));
 
             int length = 0;

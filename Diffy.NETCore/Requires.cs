@@ -14,18 +14,6 @@ namespace Diffy
     internal static class Requires
     {
         [Conditional("REQUIRES_FULL")]
-        [Conditional("REQUIRES_CONDITION")]
-#if NETFX_CORE
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-        public static void Condition(bool value, string paramName, string message = null)
-        {
-            if (!value) {
-                throw new ArgumentException(!string.IsNullOrEmpty(message) ? message : "A precondition was not met.", paramName);
-            }
-        }
-
-        [Conditional("REQUIRES_FULL")]
         [Conditional("REQUIRES_NULL_CHECK")]
         [Conditional("REQUIRES_QUANTIFIERS")]
 #if NETFX_CORE
@@ -38,5 +26,18 @@ namespace Diffy
                 throw new ArgumentNullException(paramName);
             }
         }
+
+        [Conditional("REQUIRES_FULL")]
+        [Conditional("REQUIRES_RANGE")]
+#if NETFX_CORE
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        public static void Range(bool rangeCondition, string paramName, string message = null)
+        {
+            if (!rangeCondition) {
+                throw new ArgumentOutOfRangeException(!string.IsNullOrEmpty(message) ? message : "A precondition was not met.", paramName);
+            }
+        }
+
     }
 }
